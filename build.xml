@@ -1,0 +1,36 @@
+<project name="HibernateReverseEngineering" default="hbm2java" basedir=".">
+    <property name="hibernate.cfg.xml" value="src/main/resources/hibernate.cfg.xml"/>
+    <property name="hibernate.reveng.xml" value="src/main/resources/hibernate.reveng.xml"/>
+    <property name="output.dir" value="src/main/java"/>
+
+    <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask"
+             classpathref="project.classpath"/>
+
+    <path id="project.classpath">
+        <fileset dir="${user.home}/.m2/repository">
+            <include name="**/hibernate-core-5.6.9.Final.jar"/>
+            <include name="**/hibernate-tools-5.4.0.Final.jar"/>
+            <include name="**/mysql-connector-java-8.0.29.jar"/>
+            <!-- Adicione outras dependências necessárias -->
+        </fileset>
+    </path>
+
+    <target name="hbm2java">
+        <hibernatetool destdir="${output.dir}">
+            <jdbcconfiguration>
+                <property key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <property key="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+                <property key="hibernate.connection.url" value="jdbc:mysql://localhost:3306/seu_banco_de_dados"/>
+                <property key="hibernate.connection.username" value="seu_usuario"/>
+                <property key="hibernate.connection.password" value="sua_senha"/>
+            </jdbcconfiguration>
+
+            <jdbcexport query="SELECT * FROM person"/>
+
+            <hbm2java
+                    ejb3="true"
+                    jdk5="true"
+            />
+        </hibernatetool>
+    </target>
+</project>

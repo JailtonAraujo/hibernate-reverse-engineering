@@ -45,16 +45,21 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <id>hbm2java</id>
+                        <id>entity-generation</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>hbm2java</goal>
                         </goals>
+                        <configuration>
+                            <ejb3>true</ejb3>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <revengFile>src/main/resources/hibernate.reveng.xml</revengFile>
-                    <outputDirectory>src/main/java</outputDirectory>
+                    <propertyFile>src/main/resources/hibernate.properties</propertyFile>
+<!--                    <outputDirectory>generated_sources</outputDirectory>-->
+                    <packageName>com.project.hibernate.generated_sources</packageName>
                 </configuration>
             </plugin>
         </plugins>

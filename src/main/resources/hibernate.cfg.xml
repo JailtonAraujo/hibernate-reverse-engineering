@@ -16,6 +16,8 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Lista de classes anotadas -->
+        <mapping class="com.project.hibernate.generated_sources.People"/>
+        <mapping class="com.project.hibernate.generated_sources.Contact"/>
 <!--        <mapping class="com.example.model.Person"/>-->
     </session-factory>
 </hibernate-configuration>
